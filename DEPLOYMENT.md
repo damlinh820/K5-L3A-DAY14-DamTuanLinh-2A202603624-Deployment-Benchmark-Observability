@@ -42,6 +42,6 @@ Expected sequence: `200`, `200`, `401`, `200`. Do not paste the secret or the fu
 
 ## Screenshots
 
-- [x] [Deployment dashboard](screenshots/dashboard.png) (`screenshots/dashboard.png`)
+- [ ] [Deployment dashboard](screenshots/dashboard.png) (`screenshots/dashboard.png` — cần thay bằng ảnh chụp trực tiếp trang Render Dashboard)
 - [x] [Service running](screenshots/running.png) (`screenshots/running.png`)
-- [x] [Test results](screenshots/test.png) (`screenshots/test.png`)
+- [ ] [Test results](screenshots/test.png) (`screenshots/test.png` — cần thay bằng ảnh chụp terminal sau khi chạy đủ 4 lệnh có `$AGENT_API_KEY`)
