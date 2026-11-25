@@ -80,7 +80,7 @@ Trong ví dụ hiện tại, agent chỉ được cấu hình URL Redis/Qdrant; 
 | Restart/deploy | `ON_FAILURE`, tối đa 3 lần thử | `autoDeploy: true` khi push repo |
 | Secret và Redis | Đặt biến môi trường qua dashboard/CLI; file mẫu chưa khai báo Redis | Agent mock Part 3 không dùng secret hay Redis, nên Blueprint chưa cấp hai tài nguyên này |
 
-Blueprint đã sync commit `9c8d3c7` và tạo một service tại `https://day14-production-agent-jpuw.onrender.com`, nhưng service đó kết nối Redis lỗi (`/ready` → 503). URL public mới `https://day14-production-agent-xw12.onrender.com` đã được kiểm tra ngày 2026-11-25: `/health` → 200, `/ready` → 200, `/ask` không key → 401. Chưa xác minh `/ask` với key vì key bí mật phải do người nộp tự giữ; chưa xác minh service mới liên kết Blueprint/commit nào. Xem `DEPLOYMENT.md` để theo dõi phép thử còn thiếu; không ghi giá trị secret vào repo.
+Blueprint đã sync commit `9c8d3c7` và tạo một service tại `https://day14-production-agent-jpuw.onrender.com`, nhưng service đó kết nối Redis lỗi (`/ready` → 503). URL public mới `https://day14-production-agent-xw12.onrender.com` đã được kiểm tra ngày 2026-11-25 và vượt qua đủ 4 phép thử CP6: `/health` → 200, `/ready` → 200, `/ask` không có key → 401, `/ask` có `X-API-Key` hợp lệ → 200 (`{"question":"Hello","answer":"Đây là câu trả lời từ AI agent (mock)...","cost_usd":1.035e-05}`). Chi tiết ghi tại `DEPLOYMENT.md`; giá trị secret không lưu vào repo.
 
 ### Exercise 3.3 — Pipeline Cloud Run
 

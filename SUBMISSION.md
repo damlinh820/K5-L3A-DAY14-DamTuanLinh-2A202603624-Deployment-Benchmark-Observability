@@ -62,7 +62,7 @@ cp -r 06-lab-complete/benchmark-observability/production/benchmark-results/. ben
 - [x] Tên repo đúng mẫu, repo Public, mở link ở cửa sổ ẩn danh không bị 404.
 - [x] Trong `06-lab-complete/`: `python check_production_ready.py` báo `PASS 12/12` (bản đầy đủ, có Docker).
 - [x] `MISSION_ANSWERS.md` trả lời đủ Part 1–5, có dán output script chấm và mục AI log.
-- [ ] `DEPLOYMENT.md` có URL chạy được: `/health` và `/ready` trả 200, `/ask` không có key trả 401, có key trả 200 (4 lệnh ở CP6).
+- [x] `DEPLOYMENT.md` có URL chạy được: `/health` và `/ready` trả 200, `/ask` không có key trả 401, có key trả 200 (4 lệnh ở CP6).
 - [x] `BENCHMARK_REPORT.md` điền đủ; `reports/`, `benchmark-results/` và 7 ảnh trong `screenshots/` có mặt.
 - [x] Số trong `BENCHMARK_REPORT.md` khớp file JSON/CSV.
 - [x] Không có `.env` hay secret trong repo và lịch sử commit (`git log --all --oneline -- '*.env' '.env'` không in gì).

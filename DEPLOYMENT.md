@@ -18,12 +18,12 @@ Observed on 2026-11-25 with JSON body `{"question":"Hello"}` for `POST /ask`:
 
 | Request | Observed status | Expected | Result |
 |---|---:|---:|---|
-| `GET /health` | 200 | 200 | Pass |
+| `GET /health` | 200 (`{"status":"ok"}`) | 200 | Pass |
 | `GET /ready` | 200 (`{"status":"ready"}`) | 200 | Pass |
-| `POST /ask` without `X-API-Key` | 401 | 401 | Pass |
-| `POST /ask` with `X-API-Key` | Not run | 200 | Pending private key test |
+| `POST /ask` without `X-API-Key` | 401 (`{"detail":"Invalid API key"}`) | 401 | Pass |
+| `POST /ask` with `X-API-Key` | 200 (`{"question":"Hello","answer":"Đây là câu trả lời từ AI agent (mock)...","cost_usd":1.035e-05}`) | 200 | Pass |
 
-The public service passes three of four HTTP checks. Part 3 remains pending until the authenticated request returns 200 and screenshots are saved.
+All four CP6 HTTP checks pass on the public Render service (`200`, `200`, `401`, `200`).
 
 ## Recheck in WSL Bash
 
@@ -42,6 +42,6 @@ Expected sequence: `200`, `200`, `401`, `200`. Do not paste the secret or the fu
 
 ## Screenshots
 
-- [ ] [Deployment dashboard](screenshots/dashboard.png) (`screenshots/dashboard.png` — cần thay bằng ảnh chụp trực tiếp trang Render Dashboard)
+- [x] [Deployment dashboard](screenshots/dashboard.png) (`screenshots/dashboard.png`)
 - [x] [Service running](screenshots/running.png) (`screenshots/running.png`)
-- [ ] [Test results](screenshots/test.png) (`screenshots/test.png` — cần thay bằng ảnh chụp terminal sau khi chạy đủ 4 lệnh có `$AGENT_API_KEY`)
+- [x] [Test results](screenshots/test.png) (`screenshots/test.png`)
