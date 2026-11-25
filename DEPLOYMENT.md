@@ -42,6 +42,6 @@ Expected sequence: `200`, `200`, `401`, `200`. Do not paste the secret or the fu
 
 ## Screenshots
 
-- [ ] `screenshots/dashboard.png`
-- [ ] `screenshots/running.png`
-- [ ] `screenshots/test.png`
+- [x] [Deployment dashboard](screenshots/dashboard.png) (`screenshots/dashboard.png`)
+- [x] [Service running](screenshots/running.png) (`screenshots/running.png`)
+- [x] [Test results](screenshots/test.png) (`screenshots/test.png`)
