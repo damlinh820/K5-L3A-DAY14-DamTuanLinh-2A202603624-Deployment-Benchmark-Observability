@@ -80,7 +80,7 @@ Trong ví dụ hiện tại, agent chỉ được cấu hình URL Redis/Qdrant; 
 | Restart/deploy | `ON_FAILURE`, tối đa 3 lần thử | `autoDeploy: true` khi push repo |
 | Secret và Redis | Đặt biến môi trường qua dashboard/CLI; file mẫu chưa khai báo Redis | Agent mock Part 3 không dùng secret hay Redis, nên Blueprint chưa cấp hai tài nguyên này |
 
-Chưa có bằng chứng một dịch vụ cloud đã hoạt động: Render Dashboard yêu cầu đăng nhập GitHub và chưa có URL public để kiểm tra. Agent Part 6 đã đạt `PASS 12/12` ở local; mục deploy cloud và `DEPLOYMENT.md` vẫn cần hoàn thành trên tài khoản Render.
+Blueprint đã sync commit `9c8d3c7` và tạo một service tại `https://day14-production-agent-jpuw.onrender.com`, nhưng service đó kết nối Redis lỗi (`/ready` → 503). URL public mới `https://day14-production-agent-xw12.onrender.com` đã được kiểm tra ngày 2026-11-25: `/health` → 200, `/ready` → 200, `/ask` không key → 401. Chưa xác minh `/ask` với key vì key bí mật phải do người nộp tự giữ; chưa xác minh service mới liên kết Blueprint/commit nào. Xem `DEPLOYMENT.md` để theo dõi phép thử còn thiếu; không ghi giá trị secret vào repo.
 
 ### Exercise 3.3 — Pipeline Cloud Run
 
@@ -135,10 +135,12 @@ Result: 12/12 tiêu chí đạt · 43/43 checks passed
 PASS 12/12 — PRODUCTION READY
 ```
 
-Kết quả này kiểm chứng môi trường local và Docker. Chưa có URL cloud nên chưa xác nhận các phép thử public ở CP6.
+Kết quả Part 6 này kiểm chứng môi trường local và Docker. URL cloud mới đã qua ba phép thử công khai của CP6; phép thử có API key vẫn chờ xác minh riêng.
 
 ## AI log
 
 - 2026-11-25 — Hỏi AI đọc README, checkpoint và rubric để tóm tắt công việc. AI chỉ ra Part 1–5 là phần chạy mẫu và giải thích, Part 6 là agent production, Part 7 là benchmark/observability. Đối chiếu lại với `README.md`, `CHECKPOINTS.md`, `RUBRIC.md` và `RULES.md`.
 - 2026-11-25 — Nhờ AI hoàn tất Part 1–5, rà `RULES.md` và triển khai Part 6. AI viết các module trong `06-lab-complete/app/`, Dockerfile, Compose, `.dockerignore`, `.env.example`, config Railway/Render; cập nhật phần báo cáo này. Kiểm tra bằng `check_production_ready.py --static-only` (28/28 kiểm tra tĩnh) và bộ chấm đầy đủ (43/43, `PASS 12/12`) trên Linux/Python 3.11. Người nộp cần đọc, giải thích lại từng module và tự chạy lại bộ chấm trước khi nộp; chưa xác nhận cá nhân đã tự sửa hoặc tự kiểm tra độc lập.
 - 2026-11-25 — Hỏi AI cách tự deploy Part 3 trên Render. AI đối chiếu tài liệu Render và sửa `dockerfilePath`/`dockerContext` trong `06-lab-complete/render.yaml` cho đúng đường dẫn tính từ gốc repo, chọn gói Free ở Singapore, để Render hỏi `AGENT_API_KEY` và `REDIS_URL` lúc tạo Blueprint. Cần tự kiểm tra deployment và ghi URL, ảnh, mã HTTP thực tế sau khi deploy.
+- 2026-11-25 — Nhờ AI kiểm URL Render sau khi tạo Blueprint. AI gọi ba endpoint public: `/health` 200, `/ready` 503, `/ask` không key 401; tạo `DEPLOYMENT.md` ghi rõ phép thử có key chưa chạy. Cần tự kiểm region, giá trị `REDIS_URL` trên Render và chạy lại bốn lệnh trong `DEPLOYMENT.md` sau khi sửa.
+- 2026-11-25 — Sau khi đổi Redis và nhận URL Render mới, nhờ AI kiểm lại endpoint. AI quan sát `/health` 200, `/ready` 200, `/ask` không key 401 và cập nhật báo cáo. Người nộp cần tự chạy phép thử `/ask` với key mới và ghi mã HTTP thực tế, chụp ảnh mà không lộ key.
